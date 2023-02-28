@@ -19,7 +19,7 @@ export default function Home() {
 
       const secondsDegrees = (seconds / 60) * 360 + 90;
       const minutesDegrees = (minutes / 60) * 360 + 90;
-      const hoursDegrees = (minutes / 12) * 360 + 90;
+      const hoursDegrees = (hours / 12) * 360 + 90;
 
       setHoursDegree(hoursDegrees);
       setMinutesDegree(minutesDegrees);
