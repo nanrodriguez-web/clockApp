@@ -1,56 +1,64 @@
 * {
-   margin: 0;
    padding: 0;
+   margin: 0;
    box-sizing: border-box;
 }
-
 .main {
+   min-height: 100vh;
+
+   background-color: black;
    display: flex;
-   flex-direction: column;
    justify-content: center;
    align-items: center;
-   min-height: 100vh;
-   min-width: 100vw;
-   background-color: rgb(10, 10, 10);
+   flex-direction: column;
 }
 
-.clock-face {
-   position: relative;
+.clockFace {
    height: 300px;
    width: 300px;
-   border: 0.4rem solid white;
+   border: 10px dotted rgba(255, 255, 255, 0.411);
    border-radius: 50%;
-   z-index: 0;
-   padding: 5px;
-
-   transition: all 0.05s ease;
+}
+.clock {
+   position: relative;
+   height: 100%;
+   transform: translateY(-10px);
 }
 
 .hand {
    position: absolute;
+   width: 48%;
+   height: 6px;
    top: 50%;
-   width: 140px;
    transform-origin: 100%;
+   margin: 5px;
+   transform: rotate(90deg);
+   transition: all 0.05s;
+   transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
 }
 
-.secondsHand {
-   transform: rotate(90deg);
-   transition: all 0.05s ease;
-   border-bottom: 3px solid white;
+.secondHand {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: white;
 }
 .minuteHand {
-   transform: rotate(90deg);
-   transition: all 0.05s ease;
-   border-bottom: 3px solid rgb(32, 238, 4);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgba(4, 0, 255, 0.603);
 }
 .hourHand {
-   transform: rotate(90deg);
-   transition: all 0.05s ease;
-   border-bottom: 3px solid rgb(204, 11, 11);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   background-color: rgb(255, 0, 0);
 }
 
-.label {
-   display: flex;
+.labels {
+   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
    margin: 20px;
    color: white;
+   display: flex;
 }

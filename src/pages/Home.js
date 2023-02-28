@@ -1,49 +1,79 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
+   const [hours, setHours] = useState();
    const [seconds, setSeconds] = useState();
    const [minutes, setMinutes] = useState();
-   const [hour, setHour] = useState();
 
-   function getTime() {
+   const [amPM, setAMPM] = useState();
+
+   const [hoursDegree, setHoursDegree] = useState();
+   const [secondsDegree, setSecondsDegree] = useState();
+   const [minutesDegree, setMinutesDegree] = useState();
+
+   const getTime = () => {
       const date = new Date();
       const seconds = date.getSeconds();
-      const secondsDegrees = (seconds / 60) * 360 + 90;
-
-      const hour = date.getHours();
-      const hourDegrees = (hour / 60) * 360 + 90;
-
       const minutes = date.getMinutes();
+      const hours = date.getHours();
+
+      const secondsDegrees = (seconds / 60) * 360 + 90;
       const minutesDegrees = (minutes / 60) * 360 + 90;
+      const hoursDegrees = (hours / 60) * 360 + 90;
 
-      setSeconds(secondsDegrees);
-      setMinutes(minutesDegrees);
-      setHour(hourDegrees);
+      setHoursDegree(hoursDegrees);
+      setMinutesDegree(minutesDegrees);
+      setSecondsDegree(secondsDegrees);
 
-      // console.log(`${hour}:${minutes}:${seconds}`);
-   }
+      if (hours > 12) {
+         setHours(hours - 12);
+         setAMPM("pm");
+      } else if (hours < 10) {
+         setHours(`0${hours}`);
+         setAMPM("am");
+      } else {
+         setAMPM("am");
+      }
+
+      if (minutes < 10) {
+         setMinutes(`0${minutes}`);
+      } else {
+         setMinutes(minutes);
+      }
+
+      if (seconds < 10) {
+         setSeconds(`0${seconds}`);
+      } else {
+         setSeconds(seconds);
+      }
+   };
+
    setInterval(getTime, 1000);
 
    return (
       <div className="main">
-         <div className="clock-face">
-            <div
-               className="hand hourHand"
-               style={{ transform: `rotate(${hour}deg)` }}
-            ></div>
-            <div
-               className="hand minuteHand"
-               style={{ transform: `rotate(${minutes}deg)` }}
-            ></div>
-            <div
-               className="hand secondsHand"
-               style={{ transform: `rotate(${seconds}deg)` }}
-            ></div>
+         <div className="clockFace">
+            <div className="clock">
+               <div
+                  className="hand hourHand"
+                  style={{ transform: `rotate(${hoursDegree}deg)` }}
+               ></div>
+               <div
+                  className="hand minuteHand"
+                  style={{ transform: `rotate(${minutesDegree}deg)` }}
+               ></div>
+               <div
+                  className="hand secondHand"
+                  style={{ transform: `rotate(${secondsDegree}deg)` }}
+               ></div>
+            </div>
          </div>
 
-         <div className="label">
-            <h1 className="labels">{((hour - 90) / 360) * 60}:</h1>
-            <h1 className="labels">{((minutes - 90) / 360) * 60}</h1>
+         <div className="labels">
+            <h1>{hours}:</h1>
+            <h1>{minutes}:</h1>
+            <h1>{seconds}</h1>
+            <h1>{amPM}</h1>
          </div>
       </div>
    );
