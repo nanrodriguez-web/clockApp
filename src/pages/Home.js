@@ -26,12 +26,20 @@ export default function Home() {
       setSecondsDegree(secondsDegrees);
 
       if (hours > 12) {
-         setHours(hours - 12);
-         setAMPM("pm");
+         const pmHour = hours - 12;
+
+         if (pmHour < 10) {
+            setHours(`0${pmHour}`);
+            setAMPM("pm");
+         } else {
+            setHours(pmHour);
+            setAMPM("pm");
+         }
       } else if (hours < 10) {
          setHours(`0${hours}`);
          setAMPM("am");
       } else {
+         setHours(hours);
          setAMPM("am");
       }
 
@@ -56,7 +64,9 @@ export default function Home() {
             <div className="clock">
                <div
                   className="hand hourHand"
-                  style={{ transform: `rotate(${hoursDegree}deg)` }}
+                  style={{
+                     transform: `rotate(${hoursDegree}deg)`,
+                  }}
                ></div>
                <div
                   className="hand minuteHand"
@@ -73,7 +83,7 @@ export default function Home() {
             <h1>{hours}:</h1>
             <h1>{minutes}:</h1>
             <h1>{seconds}</h1>
-            <h1>{amPM}</h1>
+            <h1 className="amPM">{amPM}</h1>
          </div>
       </div>
    );
